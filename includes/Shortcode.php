@@ -202,6 +202,16 @@ class Shortcode {
                         <?php elseif ($field['type'] === 'number'): ?>
                             <input type="number" name="<?php echo esc_attr($field['id']); ?>" placeholder="<?php echo esc_attr($field['placeholder'] ?? ''); ?>" <?php echo !empty($field['required']) ? 'required' : ''; ?> <?php echo isset($field['min']) ? 'min="'.esc_attr($field['min']).'"' : ''; ?> <?php echo isset($field['max']) ? 'max="'.esc_attr($field['max']).'"' : ''; ?>>
 
+                        <?php elseif ($field['type'] === 'photo'): ?>
+                            <div class="chatty-form-photo-field"
+                                data-field-id="<?php echo esc_attr($field['id']); ?>"
+                                data-max-photos="<?php echo esc_attr($field['maxPhotos'] ?? 1); ?>"
+                                data-required="<?php echo !empty($field['required']) ? '1' : '0'; ?>"
+                                data-api-url="<?php echo esc_url(rest_url('chatty-forms/v1/upload-photo')); ?>"
+                                data-nonce="<?php echo esc_attr(wp_create_nonce('wp_rest')); ?>">
+                                <!-- Photo grid will be initialized by frontend JS -->
+                            </div>
+
                         <?php else: ?>
                             <input 
                                 type="<?php echo esc_attr($field['type'] === 'email' ? 'email' : ($field['htmlType'] ?? 'text')); ?>"

@@ -36,9 +36,17 @@ class AdminApp {
             $asset_file['version']
         );
         
+        // Pass data to the React app
+        $emblem_url = '';
+        $core_emblem = WP_PLUGIN_DIR . '/chatty-core/assets/images/logo-concierge-emblem.png';
+        if (file_exists($core_emblem)) {
+            $emblem_url = plugins_url('chatty-core/assets/images/logo-concierge-emblem.png');
+        }
+
         wp_localize_script('chatty-forms-app', 'chattyFormsData', [
-            'apiUrl' => rest_url('chatty-forms/v1'),
-            'nonce' => wp_create_nonce('wp_rest')
+            'apiUrl'    => rest_url('chatty-forms/v1'),
+            'nonce'     => wp_create_nonce('wp_rest'),
+            'emblemUrl' => $emblem_url,
         ]);
     }
 }

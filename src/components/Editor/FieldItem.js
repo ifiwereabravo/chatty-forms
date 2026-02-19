@@ -44,6 +44,13 @@ const FieldItem = ({ field }) => {
                 return <input type="url" placeholder={field.placeholder || 'https://'} disabled />;
             case 'custom':
                 return <input type={field.htmlType || 'text'} placeholder={field.placeholder || 'Custom field...'} disabled />;
+            case 'photo':
+                return (
+                    <div className="chatty-forms-photo-preview" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px', background: '#1a202c', borderRadius: '6px', border: '1px dashed #4a5568' }}>
+                        <span style={{ fontSize: '24px' }}>📷</span>
+                        <span style={{ color: '#a0aec0', fontSize: '13px' }}>Photo Upload (max {field.maxPhotos || 1})</span>
+                    </div>
+                );
             default:
                 return <input type={field.type === 'email' ? 'email' : 'text'} placeholder={field.placeholder} disabled />;
         }

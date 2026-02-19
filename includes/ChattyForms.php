@@ -39,6 +39,12 @@ class ChattyForms {
         // API
         new Api\SubmissionHandler();
         new Api\FormController();
+        new Api\PhotoUploadHandler();
+
+        // Admin Submissions Viewer
+        if (is_admin()) {
+            new Admin\SubmissionsPage();
+        }
     }
 
     public static function activate() {

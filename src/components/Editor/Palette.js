@@ -34,6 +34,7 @@ export const FIELD_TYPES = [
     { type: 'checkbox', label: __('Checkboxes', 'chatty-forms') },
     { type: 'radio', label: __('Radio Buttons', 'chatty-forms') },
     { type: 'date', label: __('Date Picker', 'chatty-forms') },
+    { type: 'photo', label: __('📷 Photo Upload', 'chatty-forms') },
 ];
 
 const Palette = () => {

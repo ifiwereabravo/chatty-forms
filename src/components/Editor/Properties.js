@@ -15,6 +15,7 @@ const TYPE_OPTIONS = [
     { label: 'Checkboxes', value: 'checkbox' },
     { label: 'Radio Buttons', value: 'radio' },
     { label: 'Date', value: 'date' },
+    { label: 'Photo Upload', value: 'photo' },
     { label: 'Custom', value: 'custom' },
 ];
 
@@ -105,6 +106,18 @@ const Properties = () => {
                     value={field.htmlType || 'text'}
                     onChange={(val) => handleChange('htmlType', val)}
                     help={__('e.g. text, tel, color, range, file', 'chatty-forms')}
+                />
+            )}
+
+            {field.type === 'photo' && (
+                <TextControl
+                    label={__('Max Photos', 'chatty-forms')}
+                    type="number"
+                    value={field.maxPhotos || 1}
+                    onChange={(val) => handleChange('maxPhotos', Math.min(10, Math.max(1, parseInt(val) || 1)))}
+                    help={__('Maximum number of photos (1–10)', 'chatty-forms')}
+                    min={1}
+                    max={10}
                 />
             )}
 
