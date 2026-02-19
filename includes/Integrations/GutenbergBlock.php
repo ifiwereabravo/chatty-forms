@@ -12,15 +12,21 @@ class GutenbergBlock {
     }
 
     public function register_block() {
-        $block_dir = CHATTY_FORMS_PATH . 'src/block';
+        $block_dir = CHATTY_FORMS_PATH . 'build/block';
 
         if (!file_exists($block_dir . '/block.json')) {
             return;
         }
 
-        register_block_type($block_dir, [
-            'render_callback' => [$this, 'render_block'],
-        ]);
+        try {
+            register_block_type($block_dir, [
+                'render_callback' => [$this, 'render_block'],
+            ]);
+        } catch (\Throwable $e) {
+            if (defined('WP_DEBUG') && WP_DEBUG) {
+                error_log('[CHATTY Forms] Block registration failed: ' . $e->getMessage());
+            }
+        }
     }
 
     /**
