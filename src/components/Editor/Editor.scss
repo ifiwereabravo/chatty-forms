@@ -1,0 +1,414 @@
+/* CHATTY Forms — Editor Components (Dark Theme) */
+
+/* Palette Items */
+.chatty-forms-palette-item {
+    padding: 10px 12px;
+    margin-bottom: 6px;
+    background: var(--chatty-bg-darker);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--chatty-radius-sm);
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--chatty-font-size-sm);
+    color: var(--chatty-text-primary);
+    transition: all var(--chatty-transition-fast);
+    position: relative;
+
+    &:hover {
+        border-color: var(--chatty-accent-blue);
+        background: rgba(66, 153, 225, 0.08);
+        box-shadow: var(--chatty-shadow-sm);
+    }
+
+    &.is-dragging {
+        opacity: 0.4;
+    }
+
+    .dashicons {
+        color: var(--chatty-text-muted);
+        font-size: 16px;
+    }
+}
+
+/* Drag Overlay — rendered via portal to body, always on top */
+.chatty-forms-drag-overlay {
+    padding: 10px 16px;
+    background: var(--chatty-bg-dark, #2d3748);
+    border: 2px solid var(--chatty-accent-blue, #4299e1);
+    border-radius: 6px;
+    color: var(--chatty-text-primary, #fff);
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    white-space: nowrap;
+
+    .dashicons {
+        color: var(--chatty-accent-blue, #4299e1);
+        font-size: 16px;
+    }
+}
+
+/* Custom Field Button */
+.chatty-forms-custom-field-btn {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 12px;
+    background: transparent;
+    border: 2px dashed rgba(255, 255, 255, 0.12);
+    border-radius: var(--chatty-radius-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: var(--chatty-font-size-sm);
+    color: var(--chatty-text-secondary);
+    transition: all var(--chatty-transition-fast);
+
+    &:hover {
+        border-color: var(--chatty-accent-blue);
+        color: var(--chatty-accent-blue);
+        background: rgba(66, 153, 225, 0.05);
+    }
+
+    .dashicons {
+        font-size: 16px;
+    }
+}
+
+/* Canvas Area */
+.chatty-forms-canvas {
+    width: 620px;
+    background: var(--chatty-bg-dark);
+    min-height: calc(100vh - 160px);
+    box-shadow: var(--chatty-shadow-lg);
+    border-radius: var(--chatty-card-radius);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.chatty-forms-empty-state {
+    padding: 60px 40px;
+    text-align: center;
+    color: var(--chatty-text-muted);
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    border-radius: var(--chatty-radius-lg);
+    margin-top: 20px;
+    font-size: var(--chatty-font-size-sm);
+}
+
+/* Field Item */
+.chatty-forms-field-item {
+    padding: 16px;
+    border: 1px solid transparent;
+    border-radius: var(--chatty-radius-md);
+    position: relative;
+    cursor: pointer;
+    background: var(--chatty-bg-dark);
+    transition: all var(--chatty-transition-fast);
+
+    /* When being dragged/sorted */
+    &[style*="transform"] {
+        z-index: 99999 !important;
+        box-shadow: var(--chatty-shadow-xl);
+    }
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.03);
+        border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    &.is-selected {
+        border-color: var(--chatty-accent-blue);
+        background: rgba(66, 153, 225, 0.06);
+        box-shadow: 0 0 0 1px var(--chatty-accent-blue);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: var(--chatty-font-weight-medium);
+        font-size: var(--chatty-font-size-sm);
+        color: var(--chatty-text-primary);
+
+        .required {
+            color: var(--chatty-status-error-light);
+            margin-left: 2px;
+        }
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--chatty-radius-sm);
+        background: var(--chatty-bg-darker);
+        color: var(--chatty-text-muted);
+        pointer-events: none;
+        font-size: var(--chatty-font-size-sm);
+        box-sizing: border-box;
+    }
+}
+
+.chatty-forms-address-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.chatty-forms-address-row {
+    display: flex;
+    gap: 8px;
+
+    input {
+        flex: 1;
+    }
+}
+
+/* Properties Panel */
+.chatty-forms-prop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+
+    h4 {
+        margin: 0;
+        color: var(--chatty-text-primary);
+        font-size: var(--chatty-font-size-sm);
+    }
+
+    button {
+        color: var(--chatty-status-error-light) !important;
+        font-size: var(--chatty-font-size-xs);
+
+        &:hover {
+            color: var(--chatty-status-error) !important;
+        }
+    }
+}
+
+/* WP Component overrides for dark theme in properties panel */
+.chatty-forms-field-properties {
+    .components-base-control__label {
+        color: var(--chatty-text-secondary) !important;
+        font-size: var(--chatty-font-size-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+    }
+
+    .components-text-control__input,
+    .components-textarea-control__input {
+        background: var(--chatty-bg-darker) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        color: var(--chatty-text-primary) !important;
+        border-radius: var(--chatty-radius-sm) !important;
+
+        &:focus {
+            border-color: var(--chatty-accent-blue) !important;
+            box-shadow: 0 0 0 1px var(--chatty-accent-blue) !important;
+        }
+    }
+
+    .components-toggle-control .components-base-control__help {
+        color: var(--chatty-text-muted);
+    }
+}
+
+.chatty-forms-prop-help {
+    margin-top: 24px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 11px;
+    color: var(--chatty-text-muted);
+
+    p {
+        margin: 2px 0;
+    }
+
+    code {
+        background: var(--chatty-bg-darker);
+        padding: 1px 5px;
+        border-radius: 3px;
+        font-size: 10px;
+        color: var(--chatty-text-secondary);
+    }
+}
+
+/* Tab Switcher */
+.chatty-forms-tab-switcher {
+    display: flex;
+    background: var(--chatty-bg-darker);
+    border-radius: var(--chatty-radius-sm);
+    padding: 2px;
+    gap: 2px;
+    margin-right: 12px;
+}
+
+.chatty-forms-tab {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border: none;
+    border-radius: var(--chatty-radius-sm);
+    background: transparent;
+    color: var(--chatty-text-muted);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all var(--chatty-transition-fast);
+    white-space: nowrap;
+
+    &:hover {
+        color: var(--chatty-text-primary);
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    &.active {
+        background: var(--chatty-accent-blue);
+        color: #fff;
+    }
+
+    .dashicons {
+        font-size: 14px;
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* Settings View */
+.chatty-forms-settings-view {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 32px 24px;
+}
+
+.chatty-forms-settings-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.chatty-forms-settings-section {
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+    &:first-child {
+        padding-top: 0;
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    h4 {
+        margin: 0 0 4px;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--chatty-text-primary);
+    }
+}
+
+.chatty-forms-settings-help {
+    margin: 0 0 16px;
+    font-size: 12px;
+    color: var(--chatty-text-muted);
+}
+
+.chatty-forms-settings-label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--chatty-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.chatty-forms-settings-note {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: rgba(66, 153, 225, 0.08);
+    border: 1px solid rgba(66, 153, 225, 0.2);
+    border-radius: var(--chatty-radius-sm);
+    font-size: 12px;
+    color: var(--chatty-accent-blue);
+
+    .dashicons {
+        font-size: 14px;
+    }
+}
+
+/* File Picker */
+.chatty-forms-file-picker {
+    margin-top: 8px;
+
+    >label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: var(--chatty-text-secondary);
+    }
+}
+
+.chatty-forms-file-selected {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    background: var(--chatty-bg-darker);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--chatty-radius-sm);
+}
+
+.chatty-forms-file-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .dashicons {
+        font-size: 24px;
+        color: var(--chatty-accent-blue);
+    }
+
+    strong {
+        display: block;
+        color: var(--chatty-text-primary);
+        font-size: 13px;
+    }
+
+    small {
+        color: var(--chatty-text-muted);
+        font-size: 11px;
+    }
+}
+
+.chatty-forms-file-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.chatty-forms-share-settings,
+.chatty-forms-login-settings {
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--chatty-radius-sm);
+}

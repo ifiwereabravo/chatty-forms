@@ -1,0 +1,343 @@
+/* CHATTY Forms — Main Styles (Dark Theme) */
+
+body.toplevel_page_chatty-forms {
+    background: var(--chatty-bg-darker);
+}
+
+#chatty-forms-root {
+    height: 100%;
+    color: var(--chatty-text-primary);
+}
+
+/* Dashboard */
+.chatty-forms-dashboard-view {
+    padding: var(--chatty-space-3xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chatty-forms-empty-placeholder {
+    text-align: center;
+    background: var(--chatty-bg-dark);
+    padding: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--chatty-card-radius);
+    max-width: 500px;
+    width: 100%;
+    box-shadow: var(--chatty-shadow-md);
+
+    h2 {
+        margin-top: 0;
+        font-size: var(--chatty-font-size-xl);
+        color: var(--chatty-text-primary);
+    }
+
+    p {
+        color: var(--chatty-text-secondary);
+    }
+}
+
+.chatty-forms-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: var(--chatty-space-lg);
+
+    h2 {
+        margin: 0;
+        font-size: var(--chatty-font-size-lg);
+        color: var(--chatty-text-primary);
+    }
+}
+
+/* Form Table */
+.chatty-forms-table {
+    width: 100%;
+    max-width: 1000px;
+    border-collapse: collapse;
+    background: var(--chatty-bg-dark);
+    box-shadow: var(--chatty-shadow-md);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--chatty-card-radius);
+    overflow: hidden;
+
+    th,
+    td {
+        padding: 14px 18px;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        font-size: var(--chatty-font-size-sm);
+        color: var(--chatty-text-primary);
+    }
+
+    th {
+        background: var(--chatty-bg-darker);
+        font-weight: var(--chatty-font-weight-semibold);
+        color: var(--chatty-text-secondary);
+        text-transform: uppercase;
+        font-size: var(--chatty-font-size-xs);
+        letter-spacing: 0.5px;
+    }
+
+    tr:last-child td {
+        border-bottom: none;
+    }
+
+    tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+    }
+}
+
+.chatty-forms-title-link {
+    color: var(--chatty-accent-blue);
+    text-decoration: none;
+    font-weight: var(--chatty-font-weight-semibold);
+    transition: color var(--chatty-transition-fast);
+
+    &:hover {
+        color: #63b3ed;
+        text-decoration: underline;
+    }
+}
+
+.chatty-forms-status-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: var(--chatty-radius-full);
+    font-size: var(--chatty-font-size-xs);
+    font-weight: var(--chatty-font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+
+    &.draft {
+        background: var(--chatty-flag-neutral-bg);
+        color: var(--chatty-flag-neutral-text);
+    }
+
+    &.publish {
+        background: var(--chatty-flag-active-bg);
+        color: var(--chatty-flag-active-text);
+    }
+}
+
+.chatty-forms-shortcode {
+    font-size: 11px;
+    background: var(--chatty-bg-darker);
+    padding: 3px 8px;
+    border-radius: var(--chatty-radius-sm);
+    color: var(--chatty-text-muted);
+    font-family: monospace;
+}
+
+/* Button overrides for WP components in dark theme */
+.chatty-forms-dashboard-view .components-button.is-primary,
+.chatty-forms-list-header .components-button.is-primary {
+    background: linear-gradient(135deg, var(--chatty-brand-primary) 0%, var(--chatty-brand-secondary) 100%);
+    color: #fff;
+    border: none;
+    border-radius: var(--chatty-radius-md);
+    box-shadow: var(--chatty-shadow-glow);
+    transition: all var(--chatty-transition-base);
+
+    &:hover {
+        box-shadow: 0 6px 12px rgba(102, 126, 234, 0.5);
+        transform: translateY(-1px);
+    }
+}
+
+.chatty-forms-dashboard-view .components-button.is-tertiary,
+.chatty-forms-table .components-button.is-tertiary {
+    color: var(--chatty-text-secondary);
+
+    &:hover {
+        color: var(--chatty-text-primary);
+        background: rgba(255, 255, 255, 0.05);
+    }
+}
+
+.chatty-forms-table .components-button.is-destructive {
+    color: var(--chatty-status-error-light) !important;
+
+    &:hover {
+        color: var(--chatty-status-error) !important;
+        background: rgba(220, 50, 50, 0.1);
+    }
+}
+
+/* Editor Toolbar */
+.chatty-forms-editor-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.chatty-forms-editor-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    background: var(--chatty-bg-darker);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    min-height: 52px;
+    box-sizing: border-box;
+}
+
+.chatty-forms-toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .components-button.is-tertiary {
+        color: var(--chatty-text-secondary);
+
+        &:hover {
+            color: var(--chatty-text-primary);
+        }
+    }
+}
+
+.chatty-forms-toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .components-button.is-primary {
+        background: linear-gradient(135deg, var(--chatty-brand-primary) 0%, var(--chatty-brand-secondary) 100%);
+        color: #fff;
+        border: none;
+        border-radius: var(--chatty-radius-md);
+        box-shadow: var(--chatty-shadow-glow);
+    }
+}
+
+.chatty-forms-title-input {
+    border: 1px solid transparent;
+    background: transparent;
+    font-size: 15px;
+    font-weight: var(--chatty-font-weight-semibold);
+    padding: 6px 10px;
+    border-radius: var(--chatty-radius-sm);
+    color: var(--chatty-text-primary);
+    min-width: 200px;
+    transition: border-color var(--chatty-transition-fast);
+
+    &:hover {
+        border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    &:focus {
+        border-color: var(--chatty-accent-blue);
+        outline: none;
+        box-shadow: 0 0 0 1px var(--chatty-accent-blue);
+    }
+}
+
+.chatty-forms-unsaved-badge {
+    font-size: var(--chatty-font-size-xs);
+    color: var(--chatty-button-warning-text);
+    background: var(--chatty-flag-warning-bg);
+    padding: 3px 10px;
+    border-radius: var(--chatty-radius-full);
+    font-weight: var(--chatty-font-weight-semibold);
+}
+
+.chatty-forms-shortcode-inline {
+    font-size: 11px;
+    background: var(--chatty-bg-dark);
+    padding: 4px 10px;
+    border-radius: var(--chatty-radius-sm);
+    color: var(--chatty-text-muted);
+    font-family: monospace;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Inline Delete Confirmation */
+.chatty-forms-inline-confirm {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    span {
+        color: var(--chatty-status-error-light);
+        font-size: var(--chatty-font-size-xs);
+        font-weight: var(--chatty-font-weight-medium);
+    }
+}
+
+/* Toast Notification */
+.chatty-forms-toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.chatty-forms-toast {
+    padding: 12px 20px;
+    border-radius: var(--chatty-radius-md);
+    font-size: var(--chatty-font-size-sm);
+    font-weight: var(--chatty-font-weight-medium);
+    color: #fff;
+    box-shadow: var(--chatty-shadow-xl);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    animation: chatty-toast-in 0.3s ease-out;
+    min-width: 280px;
+    max-width: 400px;
+
+    &.success {
+        background: var(--chatty-flag-success-bg);
+        border-left: 4px solid #2f855a;
+    }
+
+    &.error {
+        background: var(--chatty-flag-error-bg);
+        border-left: 4px solid #b71c1c;
+    }
+
+    &.warning {
+        background: var(--chatty-flag-warning-bg);
+        border-left: 4px solid #b45309;
+    }
+
+    &.info {
+        background: var(--chatty-flag-info-bg);
+        border-left: 4px solid #2c5282;
+    }
+
+    &.exiting {
+        animation: chatty-toast-out 0.3s ease-in forwards;
+    }
+}
+
+@keyframes chatty-toast-in {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes chatty-toast-out {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
