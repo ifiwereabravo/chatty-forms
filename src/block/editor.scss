@@ -1,0 +1,56 @@
+/* CHATTY Forms — Gutenberg Block Editor Styles */
+
+.chatty-forms-block-preview {
+    background: #1a202c;
+    border: 2px solid #2d3748;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    color: #e2e8f0;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    &__icon {
+        font-size: 24px;
+    }
+
+    &__title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #ffd700;
+    }
+
+    &__info {
+        code {
+            background: #2d3748;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #a0aec0;
+        }
+    }
+}
+
+/* Override WP placeholder styling */
+.wp-block-chatty-forms-form {
+    .components-placeholder {
+        background: #1a202c;
+        border: 2px dashed #4a5568;
+        border-radius: 8px;
+        color: #e2e8f0;
+
+        .components-placeholder__label {
+            color: #ffd700;
+        }
+
+        .components-placeholder__instructions {
+            color: #a0aec0;
+        }
+    }
+}

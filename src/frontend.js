@@ -253,6 +253,14 @@ class ChattyPhotoField {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // ─── Standalone Visitor ID ────────────────────────────────────
+    // If chatty-core isn't present, Forms generates its own visitor cookie
+    // so the visitor_id persists across sessions before contact info is submitted.
+    if (!getCookie('chatty_visitor_id')) {
+        const vid = 'cf_' + crypto.randomUUID();
+        document.cookie = `chatty_visitor_id=${vid};path=/;max-age=${365 * 24 * 60 * 60};SameSite=Lax`;
+    }
+
     const wrappers = document.querySelectorAll('.chatty-form-wrapper');
 
     wrappers.forEach(wrapper => {

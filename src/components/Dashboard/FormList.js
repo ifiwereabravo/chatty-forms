@@ -73,7 +73,7 @@ const FormList = ({ onEdit, onCreate }) => {
                 </thead>
                 <tbody>
                     {forms.map(form => (
-                        <tr key={form.id}>
+                        <tr key={form.id} onClick={() => onEdit(form.id)} style={{ cursor: 'pointer' }}>
                             <td>
                                 <a
                                     href="#"
@@ -93,7 +93,7 @@ const FormList = ({ onEdit, onCreate }) => {
                                 <code className="chatty-forms-shortcode">[chatty_form id="{form.id}"]</code>
                             </td>
                             <td>{form.updated_at}</td>
-                            <td>
+                            <td onClick={(e) => e.stopPropagation()}>
                                 {confirmDeleteId === form.id ? (
                                     <div className="chatty-forms-inline-confirm">
                                         <span>Delete?</span>
@@ -114,7 +114,7 @@ const FormList = ({ onEdit, onCreate }) => {
                                         </Button>
                                     </div>
                                 ) : (
-                                    <>
+                                    <div style={{ display: 'flex', gap: '8px' }}>
                                         <Button
                                             variant="tertiary"
                                             size="small"
@@ -130,7 +130,7 @@ const FormList = ({ onEdit, onCreate }) => {
                                         >
                                             {__('Delete', 'chatty-forms')}
                                         </Button>
-                                    </>
+                                    </div>
                                 )}
                             </td>
                         </tr>

@@ -73,6 +73,17 @@ class SubmissionHandler {
             }
         }
 
+        /**
+         * Fires after a form submission is saved.
+         * Works standalone — any plugin can hook into this to process submissions.
+         *
+         * @param int    $form_id    The form ID
+         * @param array  $data       The submitted field data
+         * @param string $visitor_id The visitor cookie ID (may be empty)
+         * @param int    $submission_id The DB row ID of the submission
+         */
+        do_action('chatty_forms_submitted', $form_id, $data, $visitor_id, $wpdb->insert_id);
+
         return rest_ensure_response(['success' => true, 'message' => 'Thank you! Your submission has been received.']);
     }
 

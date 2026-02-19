@@ -6,5 +6,6 @@ module.exports = {
         ...defaultConfig.entry,
         index: './src/index.js',
         frontend: './src/frontend.js',
+        'block-editor': './src/block/index.js',
     },
 };

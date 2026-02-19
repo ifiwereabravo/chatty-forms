@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "chatty-forms/form",
+    "version": "1.0.0",
+    "title": "CHATTY Form",
+    "category": "widgets",
+    "icon": "feedback",
+    "description": "Insert a CHATTY form into your page or post.",
+    "keywords": ["form", "chatty", "contact", "lead"],
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "formId": {
+            "type": "string",
+            "default": ""
+        }
+    },
+    "textdomain": "chatty-forms",
+    "editorScript": "file:../../build/block-editor.js",
+    "editorStyle": "file:../../build/block-editor.css"
+}

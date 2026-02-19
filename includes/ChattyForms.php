@@ -45,6 +45,10 @@ class ChattyForms {
         if (is_admin()) {
             new Admin\SubmissionsPage();
         }
+
+        // Builder Integrations
+        new Integrations\GutenbergBlock();
+        new Integrations\DiviModule();
     }
 
     public static function activate() {
