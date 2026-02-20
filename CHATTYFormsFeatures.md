@@ -32,8 +32,8 @@
 - [ ] Conditional logic (show/hide fields based on answers)
 - [ ] File upload field with drag-and-drop
 - [ ] CAPTCHA / honeypot spam protection
-- [ ] Form templates (Contact Us, Request a Quote, Feedback, etc.)
-- [ ] Form duplication
+- [x] Form templates (Contact Us, Request a Quote, Feedback, etc.)
+- [x] Form duplication
 - [ ] Field validation rules (min/max length, regex patterns)
 - [ ] Custom CSS per form
 - [ ] Form scheduling (start/end date)
@@ -57,7 +57,8 @@
 - [ ] Submission analytics dashboard (submissions over time)
 - [ ] Form conversion rate tracking
 - [ ] Field-level drop-off analysis
-- [ ] CSV/Excel export of submissions
+- [x] CSV/Excel export of submissions
+- [x] JSON export/import of form sets
 
 ## Visitor Intelligence
 - [x] Visitor identity enrichment via `VisitorIdentity` class (chatty-core)

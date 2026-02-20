@@ -341,3 +341,54 @@ body.toplevel_page_chatty-forms {
         opacity: 0;
     }
 }
+
+/* Template Grid */
+.chatty-forms-template-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.chatty-forms-template-card {
+    background: var(--chatty-card-bg);
+    border: 2px solid var(--chatty-border);
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+
+    &:hover {
+        border-color: var(--chatty-accent);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .chatty-forms-template-icon {
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+
+    h3 {
+        color: var(--chatty-text);
+        font-size: 16px;
+        margin: 0 0 6px 0;
+    }
+
+    p {
+        color: var(--chatty-text-muted);
+        font-size: 13px;
+        margin: 0 0 10px 0;
+        line-height: 1.4;
+    }
+
+    .chatty-forms-template-fields {
+        display: inline-block;
+        background: var(--chatty-surface);
+        color: var(--chatty-text-muted);
+        padding: 2px 10px;
+        border-radius: 12px;
+        font-size: 11px;
+    }
+}

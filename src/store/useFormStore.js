@@ -155,6 +155,135 @@ const useFormStore = create((set, get) => ({
 
     selectField: (id) => set({ selectedFieldId: id }),
     setIsDragging: (isDragging) => set({ isDragging }),
+
+    // === Clone ===
+    cloneForm: async (id) => {
+        try {
+            const result = await apiFetch(`/forms/${id}/clone`, { method: 'POST' });
+            // Refresh form list
+            await get().fetchForms();
+            return result;
+        } catch (e) {
+            console.error('Failed to clone form:', e);
+            return null;
+        }
+    },
+
+    // === Export / Import ===
+    exportForms: async (ids = []) => {
+        try {
+            const result = await apiFetch('/forms/export', {
+                method: 'POST',
+                body: JSON.stringify({ ids }),
+            });
+            return result;
+        } catch (e) {
+            console.error('Failed to export forms:', e);
+            return null;
+        }
+    },
+
+    importForms: async (data) => {
+        try {
+            const result = await apiFetch('/forms/import', {
+                method: 'POST',
+                body: JSON.stringify(data),
+            });
+            await get().fetchForms();
+            return result;
+        } catch (e) {
+            console.error('Failed to import forms:', e);
+            return null;
+        }
+    },
+
+    // === Templates ===
+    createFromTemplate: async (template) => {
+        try {
+            const result = await apiFetch('/forms', {
+                method: 'POST',
+                body: JSON.stringify({
+                    title: template.title,
+                    fields: template.fields,
+                    settings: template.settings || {},
+                    status: 'draft',
+                }),
+            });
+            return result;
+        } catch (e) {
+            console.error('Failed to create from template:', e);
+            return null;
+        }
+    },
 }));
+
+// Built-in form templates
+export const FORM_TEMPLATES = [
+    {
+        id: 'contact',
+        title: 'Contact Us',
+        description: 'Simple contact form with name, email, and message.',
+        icon: '✉️',
+        fields: [
+            { id: 'f1', type: 'text', label: 'Full Name', placeholder: 'John Doe', required: true },
+            { id: 'f2', type: 'email', label: 'Email Address', placeholder: 'john@example.com', required: true },
+            { id: 'f3', type: 'phone', label: 'Phone Number', placeholder: '(555) 123-4567', required: false },
+            { id: 'f4', type: 'textarea', label: 'Message', placeholder: 'How can we help you?', required: true },
+        ],
+        settings: { submitText: 'Send Message', successMessage: 'Thanks for reaching out! We\'ll get back to you soon.' },
+    },
+    {
+        id: 'quote',
+        title: 'Request a Quote',
+        description: 'Lead form for service businesses with project details.',
+        icon: '💰',
+        fields: [
+            { id: 'f1', type: 'text', label: 'Full Name', placeholder: 'Your name', required: true },
+            { id: 'f2', type: 'email', label: 'Email', placeholder: 'your@email.com', required: true },
+            { id: 'f3', type: 'phone', label: 'Phone', placeholder: '(555) 123-4567', required: true },
+            { id: 'f4', type: 'select', label: 'Service Type', required: true, options: ['General Inquiry', 'New Installation', 'Repair', 'Maintenance', 'Other'] },
+            { id: 'f5', type: 'textarea', label: 'Project Details', placeholder: 'Tell us about your project...', required: false },
+        ],
+        settings: { submitText: 'Get My Quote', successMessage: 'Your quote request has been submitted! We\'ll contact you within 24 hours.' },
+    },
+    {
+        id: 'feedback',
+        title: 'Feedback',
+        description: 'Collect customer feedback and ratings.',
+        icon: '⭐',
+        fields: [
+            { id: 'f1', type: 'text', label: 'Name', placeholder: 'Optional', required: false },
+            { id: 'f2', type: 'email', label: 'Email', placeholder: 'Optional', required: false },
+            { id: 'f3', type: 'select', label: 'How would you rate your experience?', required: true, options: ['Excellent', 'Good', 'Average', 'Below Average', 'Poor'] },
+            { id: 'f4', type: 'textarea', label: 'Tell us more', placeholder: 'What did you like or how can we improve?', required: false },
+        ],
+        settings: { submitText: 'Submit Feedback', successMessage: 'Thank you for your feedback!' },
+    },
+    {
+        id: 'newsletter',
+        title: 'Newsletter Signup',
+        description: 'Simple email capture form for newsletters.',
+        icon: '📰',
+        fields: [
+            { id: 'f1', type: 'text', label: 'First Name', placeholder: 'Your first name', required: true },
+            { id: 'f2', type: 'email', label: 'Email Address', placeholder: 'you@example.com', required: true },
+        ],
+        settings: { submitText: 'Subscribe', successMessage: 'You\'re subscribed! Check your inbox for a confirmation.' },
+    },
+    {
+        id: 'event',
+        title: 'Event Registration',
+        description: 'Registration form for events and webinars.',
+        icon: '🎟️',
+        fields: [
+            { id: 'f1', type: 'text', label: 'Full Name', placeholder: 'Your name', required: true },
+            { id: 'f2', type: 'email', label: 'Email', placeholder: 'your@email.com', required: true },
+            { id: 'f3', type: 'phone', label: 'Phone', placeholder: '(555) 123-4567', required: false },
+            { id: 'f4', type: 'text', label: 'Company / Organization', placeholder: 'Optional', required: false },
+            { id: 'f5', type: 'select', label: 'How did you hear about us?', required: false, options: ['Social Media', 'Email', 'Friend/Colleague', 'Search Engine', 'Other'] },
+        ],
+        settings: { submitText: 'Register Now', successMessage: 'You\'re registered! We\'ll send you event details shortly.' },
+    },
+];
 
 export default useFormStore;
