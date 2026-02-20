@@ -45,6 +45,19 @@ class Chatty_Forms_Divi_Module extends ET_Builder_Module {
                 'description'     => esc_html__('Choose which CHATTY form to display.', 'chatty-forms'),
                 'computed_affects' => ['__form_preview'],
             ],
+            'form_theme' => [
+                'label'           => esc_html__('Theme Mode', 'chatty-forms'),
+                'type'            => 'select',
+                'options'         => [
+                    ''      => esc_html__('Default (from settings)', 'chatty-forms'),
+                    'light' => esc_html__('☀️ Light', 'chatty-forms'),
+                    'dark'  => esc_html__('🌙 Dark', 'chatty-forms'),
+                    'auto'  => esc_html__('🔄 Auto (follows OS)', 'chatty-forms'),
+                ],
+                'default'         => '',
+                'toggle_slug'     => 'main_content',
+                'description'     => esc_html__('Override the theme for this form instance.', 'chatty-forms'),
+            ],
             '__form_preview' => [
                 'type'                => 'computed',
                 'computed_callback'   => ['Chatty_Forms_Divi_Module', 'get_form_preview'],
@@ -94,13 +107,16 @@ class Chatty_Forms_Divi_Module extends ET_Builder_Module {
             return '';
         }
 
-        // Ensure frontend assets are enqueued (Divi may not trigger wp_enqueue_scripts)
-        if (function_exists('\\Chatty\\Forms\\Shortcode')) {
-            wp_enqueue_script('chatty-forms-frontend');
-            wp_enqueue_style('chatty-forms-frontend');
+        // Ensure frontend assets are enqueued
+        wp_enqueue_script('chatty-forms-frontend');
+        wp_enqueue_style('chatty-forms-frontend');
+
+        $theme_attr = '';
+        if (!empty($this->props['form_theme'])) {
+            $theme_attr = ' theme="' . esc_attr($this->props['form_theme']) . '"';
         }
 
-        $output = do_shortcode('[chatty_form id="' . $form_id . '"]');
+        $output = do_shortcode('[chatty_form id="' . $form_id . '"' . $theme_attr . ']');
 
         // Wrap in Divi module container
         return sprintf(

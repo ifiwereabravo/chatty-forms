@@ -1,6 +1,7 @@
 import { createRoot, useState } from '@wordpress/element';
 import MainLayout from './components/Layout/MainLayout';
 import FormList from './components/Dashboard/FormList';
+import GlobalSettings from './components/Dashboard/GlobalSettings';
 import EditorLayout from './components/Editor/EditorLayout';
 import { ToastProvider } from './components/Toast/Toast';
 import useFormStore from './store/useFormStore';
@@ -24,18 +25,22 @@ const App = () => {
         setView('editor');
     };
 
-    const handleBack = () => {
-        fetchForms();
-        setView('dashboard');
+    const handleNavChange = (newView) => {
+        if (newView === 'dashboard') {
+            fetchForms();
+        }
+        setView(newView);
     };
 
     return (
         <ToastProvider>
-            <MainLayout currentView={view} onViewChange={handleBack}>
-                {view === 'dashboard' ? (
-                    <FormList onCreate={handleCreate} onEdit={handleEdit} />
+            <MainLayout currentView={view} onViewChange={handleNavChange}>
+                {view === 'settings' ? (
+                    <GlobalSettings />
+                ) : view === 'editor' ? (
+                    <EditorLayout onBack={() => handleNavChange('dashboard')} />
                 ) : (
-                    <EditorLayout onBack={handleBack} />
+                    <FormList onCreate={handleCreate} onEdit={handleEdit} />
                 )}
             </MainLayout>
         </ToastProvider>

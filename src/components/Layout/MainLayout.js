@@ -24,6 +24,12 @@ const MainLayout = ({ children, currentView, onViewChange }) => {
                     >
                         {__('Dashboard', 'chatty-forms')}
                     </Button>
+                    <Button
+                        variant={currentView === 'settings' ? 'primary' : 'tertiary'}
+                        onClick={() => onViewChange('settings')}
+                    >
+                        {__('⚙️ Settings', 'chatty-forms')}
+                    </Button>
                 </nav>
             </header>
             <main className="chatty-forms-main">

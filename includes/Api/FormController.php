@@ -64,6 +64,20 @@ class FormController {
             'callback'            => [$this, 'import_forms'],
             'permission_callback' => [$this, 'check_admin'],
         ]);
+
+        // Global settings
+        register_rest_route($namespace, '/settings', [
+            [
+                'methods'             => 'GET',
+                'callback'            => [$this, 'get_settings'],
+                'permission_callback' => [$this, 'check_admin'],
+            ],
+            [
+                'methods'             => 'PUT',
+                'callback'            => [$this, 'update_settings'],
+                'permission_callback' => [$this, 'check_admin'],
+            ],
+        ]);
     }
 
     public function check_admin() {
@@ -310,6 +324,34 @@ class FormController {
             'total'    => count($forms),
             'errors'   => $errors,
             'message'  => "{$imported} form(s) imported successfully",
+        ]);
+    }
+
+    /**
+     * Get global plugin settings
+     */
+    public function get_settings($request) {
+        return rest_ensure_response([
+            'defaultTheme' => get_option('chatty_forms_default_theme', 'light'),
+        ]);
+    }
+
+    /**
+     * Update global plugin settings
+     */
+    public function update_settings($request) {
+        $params = $request->get_json_params();
+
+        if (isset($params['defaultTheme'])) {
+            $theme = sanitize_text_field($params['defaultTheme']);
+            if (in_array($theme, ['light', 'dark', 'auto'])) {
+                update_option('chatty_forms_default_theme', $theme);
+            }
+        }
+
+        return rest_ensure_response([
+            'defaultTheme' => get_option('chatty_forms_default_theme', 'light'),
+            'message'      => 'Settings saved',
         ]);
     }
 }

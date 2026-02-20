@@ -24,6 +24,10 @@
     "formId": {
       "type": "string",
       "default": ""
+    },
+    "theme": {
+      "type": "string",
+      "default": ""
     }
   },
   "textdomain": "chatty-forms",

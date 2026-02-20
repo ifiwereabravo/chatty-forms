@@ -67,8 +67,15 @@ class Shortcode {
         $share_text = esc_attr($settings['shareText'] ?? '');
         $share_url = esc_attr($settings['shareUrl'] ?? '');
 
-        // Theme: shortcode attr > form setting > default 'light'
-        $theme = $atts['theme'] ?? ($settings['theme'] ?? 'light');
+        // Theme priority: shortcode attr > form setting > global default > 'light'
+        $theme = '';
+        if (!empty($atts['theme'])) {
+            $theme = $atts['theme'];
+        } elseif (!empty($settings['theme'])) {
+            $theme = $settings['theme'];
+        } else {
+            $theme = get_option('chatty_forms_default_theme', 'light');
+        }
         $theme = in_array($theme, ['light', 'dark', 'auto']) ? $theme : 'light';
 
         ob_start();

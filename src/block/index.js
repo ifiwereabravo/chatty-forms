@@ -9,7 +9,7 @@ import './editor.scss';
 
 registerBlockType(metadata.name, {
     edit: ({ attributes, setAttributes }) => {
-        const { formId } = attributes;
+        const { formId, theme } = attributes;
         const blockProps = useBlockProps();
         const [forms, setForms] = useState([]);
         const [loading, setLoading] = useState(true);
@@ -43,6 +43,17 @@ registerBlockType(metadata.name, {
                             options={formOptions}
                             onChange={(val) => setAttributes({ formId: val })}
                         />
+                        <SelectControl
+                            label={__('Theme Mode', 'chatty-forms')}
+                            value={theme}
+                            options={[
+                                { label: __('Default (from settings)', 'chatty-forms'), value: '' },
+                                { label: '☀️ Light', value: 'light' },
+                                { label: '🌙 Dark', value: 'dark' },
+                                { label: '🔄 Auto (follows OS)', value: 'auto' },
+                            ]}
+                            onChange={(val) => setAttributes({ theme: val })}
+                        />
                     </PanelBody>
                 </InspectorControls>
 
@@ -71,7 +82,8 @@ registerBlockType(metadata.name, {
                             </span>
                         </div>
                         <div className="chatty-forms-block-preview__info">
-                            <code>[chatty_form id="{formId}"]</code>
+                            <code>[chatty_form id="{formId}"{theme ? ` theme="${theme}"` : ''}]</code>
+                            {theme && <span className="chatty-forms-block-preview__badge">{theme === 'dark' ? '🌙' : theme === 'auto' ? '🔄' : '☀️'} {theme}</span>}
                         </div>
                     </div>
                 )}

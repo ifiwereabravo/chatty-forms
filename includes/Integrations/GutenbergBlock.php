@@ -42,6 +42,11 @@ class GutenbergBlock {
             return '';
         }
 
-        return do_shortcode('[chatty_form id="' . $form_id . '"]');
+        $theme_attr = '';
+        if (!empty($attributes['theme'])) {
+            $theme_attr = ' theme="' . esc_attr($attributes['theme']) . '"';
+        }
+
+        return do_shortcode('[chatty_form id="' . $form_id . '"' . $theme_attr . ']');
     }
 }
