@@ -94,7 +94,19 @@ class Chatty_Forms_Divi_Module extends ET_Builder_Module {
             return '';
         }
 
-        return do_shortcode('[chatty_form id="' . $form_id . '"]');
+        // Ensure frontend assets are enqueued (Divi may not trigger wp_enqueue_scripts)
+        if (function_exists('\\Chatty\\Forms\\Shortcode')) {
+            wp_enqueue_script('chatty-forms-frontend');
+            wp_enqueue_style('chatty-forms-frontend');
+        }
+
+        $output = do_shortcode('[chatty_form id="' . $form_id . '"]');
+
+        // Wrap in Divi module container
+        return sprintf(
+            '<div class="chatty-form-divi-wrap">%s</div>',
+            $output
+        );
     }
 }
 
