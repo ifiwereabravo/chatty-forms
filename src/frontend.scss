@@ -1,8 +1,131 @@
 /* CHATTY Forms — Frontend Styles */
+/* ═══════════════════════════════════════════════════════════════ */
+/*  THEME SYSTEM: Light (default) + Dark via data-theme="dark"  */
+/* ═══════════════════════════════════════════════════════════════ */
 
 .chatty-form-wrapper {
     max-width: 620px;
     margin: 0 auto;
+
+    /* ── Light Theme (default) ── */
+    --cf-bg: #fff;
+    --cf-bg-subtle: #f7fafc;
+    --cf-surface: #fff;
+    --cf-border: #e2e8f0;
+    --cf-border-hover: #cbd5e0;
+    --cf-text: #2d3748;
+    --cf-text-muted: #718096;
+    --cf-text-placeholder: #a0aec0;
+    --cf-input-bg: #fff;
+    --cf-input-border: #cbd5e0;
+    --cf-input-focus: #3182ce;
+    --cf-input-focus-ring: rgba(49, 130, 206, 0.1);
+    --cf-btn-bg: linear-gradient(135deg, #3182ce, #2b6cb0);
+    --cf-btn-bg-hover: linear-gradient(135deg, #2b6cb0, #2c5282);
+    --cf-btn-shadow: rgba(49, 130, 206, 0.3);
+    --cf-btn-disabled: #cbd5e0;
+    --cf-success-bg: #c6f6d5;
+    --cf-success-text: #22543d;
+    --cf-success-border: #9ae6b4;
+    --cf-error-bg: #fed7d7;
+    --cf-error-text: #822727;
+    --cf-error-border: #feb2b2;
+    --cf-info-bg: #bee3f8;
+    --cf-info-text: #2a4365;
+    --cf-info-border: #90cdf4;
+    --cf-required: #e53e3e;
+    --cf-divider: #e2e8f0;
+    --cf-photo-add-bg: #f7fafc;
+    --cf-photo-add-hover: #ebf8ff;
+    --cf-photo-border: #e2e8f0;
+    --cf-photo-add-border: #cbd5e0;
+    --cf-download-bg: #f0fff4;
+    --cf-download-border: #9ae6b4;
+    --cf-gate-bg: #fff;
+    --cf-shadow-light: rgba(0, 0, 0, 0.08);
+    --cf-overlay-bg: rgba(0, 0, 0, 0.9);
+}
+
+/* ── Dark Theme ── */
+.chatty-form-wrapper[data-theme="dark"] {
+    --cf-bg: #1a1a2e;
+    --cf-bg-subtle: #16213e;
+    --cf-surface: #1e293b;
+    --cf-border: #334155;
+    --cf-border-hover: #475569;
+    --cf-text: #e2e8f0;
+    --cf-text-muted: #94a3b8;
+    --cf-text-placeholder: #64748b;
+    --cf-input-bg: #0f172a;
+    --cf-input-border: #475569;
+    --cf-input-focus: #60a5fa;
+    --cf-input-focus-ring: rgba(96, 165, 250, 0.15);
+    --cf-btn-bg: linear-gradient(135deg, #3b82f6, #2563eb);
+    --cf-btn-bg-hover: linear-gradient(135deg, #2563eb, #1d4ed8);
+    --cf-btn-shadow: rgba(59, 130, 246, 0.35);
+    --cf-btn-disabled: #475569;
+    --cf-success-bg: #064e3b;
+    --cf-success-text: #6ee7b7;
+    --cf-success-border: #065f46;
+    --cf-error-bg: #7f1d1d;
+    --cf-error-text: #fca5a5;
+    --cf-error-border: #991b1b;
+    --cf-info-bg: #1e3a5f;
+    --cf-info-text: #93c5fd;
+    --cf-info-border: #1e40af;
+    --cf-required: #f87171;
+    --cf-divider: #334155;
+    --cf-photo-add-bg: #0f172a;
+    --cf-photo-add-hover: #1e293b;
+    --cf-photo-border: #334155;
+    --cf-photo-add-border: #475569;
+    --cf-download-bg: #064e3b;
+    --cf-download-border: #065f46;
+    --cf-gate-bg: #1e293b;
+    --cf-shadow-light: rgba(0, 0, 0, 0.3);
+    --cf-overlay-bg: rgba(0, 0, 0, 0.95);
+}
+
+/* ── Auto Theme: follows OS preference ── */
+@media (prefers-color-scheme: dark) {
+    .chatty-form-wrapper[data-theme="auto"] {
+        --cf-bg: #1a1a2e;
+        --cf-bg-subtle: #16213e;
+        --cf-surface: #1e293b;
+        --cf-border: #334155;
+        --cf-border-hover: #475569;
+        --cf-text: #e2e8f0;
+        --cf-text-muted: #94a3b8;
+        --cf-text-placeholder: #64748b;
+        --cf-input-bg: #0f172a;
+        --cf-input-border: #475569;
+        --cf-input-focus: #60a5fa;
+        --cf-input-focus-ring: rgba(96, 165, 250, 0.15);
+        --cf-btn-bg: linear-gradient(135deg, #3b82f6, #2563eb);
+        --cf-btn-bg-hover: linear-gradient(135deg, #2563eb, #1d4ed8);
+        --cf-btn-shadow: rgba(59, 130, 246, 0.35);
+        --cf-btn-disabled: #475569;
+        --cf-success-bg: #064e3b;
+        --cf-success-text: #6ee7b7;
+        --cf-success-border: #065f46;
+        --cf-error-bg: #7f1d1d;
+        --cf-error-text: #fca5a5;
+        --cf-error-border: #991b1b;
+        --cf-info-bg: #1e3a5f;
+        --cf-info-text: #93c5fd;
+        --cf-info-border: #1e40af;
+        --cf-required: #f87171;
+        --cf-divider: #334155;
+        --cf-photo-add-bg: #0f172a;
+        --cf-photo-add-hover: #1e293b;
+        --cf-photo-border: #334155;
+        --cf-photo-add-border: #475569;
+        --cf-download-bg: #064e3b;
+        --cf-download-border: #065f46;
+        --cf-gate-bg: #1e293b;
+        --cf-shadow-light: rgba(0, 0, 0, 0.3);
+        --cf-overlay-bg: rgba(0, 0, 0, 0.95);
+    }
 }
 
 /* Social Login */
@@ -14,7 +137,7 @@
     text-align: center;
     margin: 0 0 12px;
     font-size: 13px;
-    color: #718096;
+    color: var(--cf-text-muted);
 }
 
 .chatty-form-social-buttons {
@@ -29,18 +152,18 @@
     align-items: center;
     gap: 8px;
     padding: 10px 20px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--cf-border);
     border-radius: 6px;
-    background: #fff;
+    background: var(--cf-surface);
     font-size: 14px;
     font-weight: 500;
-    color: #2d3748;
+    color: var(--cf-text);
     cursor: pointer;
     transition: all 0.2s;
 
     &:hover {
-        border-color: #cbd5e0;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border-color: var(--cf-border-hover);
+        box-shadow: 0 2px 8px var(--cf-shadow-light);
         transform: translateY(-1px);
     }
 
@@ -65,7 +188,7 @@
     display: flex;
     align-items: center;
     margin: 20px 0;
-    color: #a0aec0;
+    color: var(--cf-text-placeholder);
     font-size: 12px;
 
     &::before,
@@ -73,7 +196,7 @@
         content: '';
         flex: 1;
         height: 1px;
-        background: #e2e8f0;
+        background: var(--cf-divider);
     }
 
     span {
@@ -84,9 +207,9 @@
 /* Form */
 .chatty-form {
     padding: 24px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--cf-border);
     border-radius: 8px;
-    background: #fff;
+    background: var(--cf-surface);
 
     .chatty-form-field {
         margin-bottom: 20px;
@@ -95,10 +218,10 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
-            color: #2d3748;
+            color: var(--cf-text);
 
             .required {
-                color: #e53e3e;
+                color: var(--cf-required);
             }
         }
 
@@ -107,22 +230,22 @@
         select {
             width: 100%;
             padding: 10px 12px;
-            border: 1px solid #cbd5e0;
+            border: 1px solid var(--cf-input-border);
             border-radius: 6px;
             font-size: 15px;
-            color: #2d3748;
-            background: #fff;
+            color: var(--cf-text);
+            background: var(--cf-input-bg);
             box-sizing: border-box;
             transition: border-color 0.2s, box-shadow 0.2s;
 
             &:focus {
-                border-color: #3182ce;
+                border-color: var(--cf-input-focus);
                 outline: none;
-                box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+                box-shadow: 0 0 0 3px var(--cf-input-focus-ring);
             }
 
             &::placeholder {
-                color: #a0aec0;
+                color: var(--cf-text-placeholder);
             }
         }
 
@@ -134,7 +257,7 @@
 
     button[type="submit"] {
         width: 100%;
-        background: linear-gradient(135deg, #3182ce, #2b6cb0);
+        background: var(--cf-btn-bg);
         color: white;
         border: none;
         padding: 14px 24px;
@@ -145,13 +268,13 @@
         transition: all 0.2s;
 
         &:hover {
-            background: linear-gradient(135deg, #2b6cb0, #2c5282);
-            box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
+            background: var(--cf-btn-bg-hover);
+            box-shadow: 0 4px 12px var(--cf-btn-shadow);
             transform: translateY(-1px);
         }
 
         &:disabled {
-            background: #cbd5e0;
+            background: var(--cf-btn-disabled);
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
@@ -170,21 +293,21 @@
         }
 
         &.success {
-            background: #c6f6d5;
-            color: #22543d;
-            border: 1px solid #9ae6b4;
+            background: var(--cf-success-bg);
+            color: var(--cf-success-text);
+            border: 1px solid var(--cf-success-border);
         }
 
         &.error {
-            background: #fed7d7;
-            color: #822727;
-            border: 1px solid #feb2b2;
+            background: var(--cf-error-bg);
+            color: var(--cf-error-text);
+            border: 1px solid var(--cf-error-border);
         }
 
         &.info {
-            background: #bee3f8;
-            color: #2a4365;
-            border: 1px solid #90cdf4;
+            background: var(--cf-info-bg);
+            color: var(--cf-info-text);
+            border: 1px solid var(--cf-info-border);
         }
     }
 }
@@ -219,6 +342,7 @@
     gap: 8px;
     cursor: pointer;
     font-weight: 400 !important;
+    color: var(--cf-text);
 
     input {
         width: auto !important;
@@ -230,19 +354,19 @@
 .chatty-form-gate {
     padding: 32px 24px;
     text-align: center;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--cf-border);
     border-radius: 8px;
-    background: #fff;
+    background: var(--cf-gate-bg);
 
     h3 {
         margin: 0 0 8px;
         font-size: 20px;
-        color: #2d3748;
+        color: var(--cf-text);
     }
 
     p {
         margin: 0 0 24px;
-        color: #718096;
+        color: var(--cf-text-muted);
         font-size: 14px;
     }
 }
@@ -309,9 +433,9 @@
 .chatty-form-download {
     text-align: center;
     padding: 32px;
-    border: 2px dashed #9ae6b4;
+    border: 2px dashed var(--cf-download-border);
     border-radius: 8px;
-    background: #f0fff4;
+    background: var(--cf-download-bg);
     animation: fadeInUp 0.4s ease-out;
 
     &.visible {
@@ -380,7 +504,7 @@
     aspect-ratio: 1;
     border-radius: 10px;
     overflow: hidden;
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--cf-photo-border);
     cursor: grab;
     transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 
@@ -403,12 +527,12 @@
     &.chatty-photo-dragging {
         opacity: 0.4;
         transform: scale(0.95);
-        border-color: #3182ce;
+        border-color: var(--cf-input-focus);
     }
 
     &.drag-over {
-        border-color: #3182ce;
-        box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.3);
+        border-color: var(--cf-input-focus);
+        box-shadow: 0 0 0 3px var(--cf-input-focus-ring);
         transform: scale(1.02);
     }
 }
@@ -469,13 +593,20 @@
 }
 
 @keyframes chatty-spin {
-    0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(180deg); }
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
 }
 
 .chatty-photo-add {
     aspect-ratio: 1;
-    border: 2px dashed #cbd5e0;
+    border: 2px dashed var(--cf-photo-add-border);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -484,11 +615,11 @@
     gap: 4px;
     cursor: pointer;
     transition: all 0.2s;
-    background: #f7fafc;
+    background: var(--cf-photo-add-bg);
 
     &:hover {
-        border-color: #3182ce;
-        background: #ebf8ff;
+        border-color: var(--cf-input-focus);
+        background: var(--cf-photo-add-hover);
         transform: scale(1.03);
     }
 
@@ -505,7 +636,7 @@
 .chatty-photo-add-label {
     font-size: 22px;
     font-weight: 700;
-    color: #a0aec0;
+    color: var(--cf-text-placeholder);
     line-height: 1;
 }
 
@@ -514,7 +645,7 @@
     position: fixed;
     inset: 0;
     z-index: 999999;
-    background: rgba(0, 0, 0, 0.9);
+    background: var(--cf-overlay-bg);
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -32,7 +32,7 @@ class Shortcode {
     }
 
     public function render_form($atts) {
-        $atts = shortcode_atts(['id' => 0], $atts);
+        $atts = shortcode_atts(['id' => 0, 'theme' => ''], $atts);
         $form_id = (int)$atts['id'];
 
         if (!$form_id) {
@@ -67,10 +67,15 @@ class Shortcode {
         $share_text = esc_attr($settings['shareText'] ?? '');
         $share_url = esc_attr($settings['shareUrl'] ?? '');
 
+        // Theme: shortcode attr > form setting > default 'light'
+        $theme = $atts['theme'] ?? ($settings['theme'] ?? 'light');
+        $theme = in_array($theme, ['light', 'dark', 'auto']) ? $theme : 'light';
+
         ob_start();
         ?>
         <div class="chatty-form-wrapper"
             data-form-id="<?php echo esc_attr($form_id); ?>"
+            data-theme="<?php echo esc_attr($theme); ?>"
             data-delivery="<?php echo $delivery_type; ?>"
             data-gate="<?php echo $gate_type; ?>"
             data-download="<?php echo $download_url; ?>"
