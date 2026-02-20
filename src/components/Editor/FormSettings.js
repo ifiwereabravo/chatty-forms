@@ -48,6 +48,21 @@ const FormSettings = () => {
     return (
         <div className="chatty-forms-settings-panel">
 
+            {/* Appearance */}
+            <div className="chatty-forms-settings-section">
+                <h4>{__('Appearance', 'chatty-forms')}</h4>
+                <SelectControl
+                    label={__('Theme Mode', 'chatty-forms')}
+                    value={settings.theme || 'light'}
+                    options={[
+                        { label: '☀️ Light', value: 'light' },
+                        { label: '🌙 Dark', value: 'dark' },
+                        { label: '🔄 Auto (follows OS)', value: 'auto' },
+                    ]}
+                    onChange={(val) => updateSettings({ theme: val })}
+                />
+            </div>
+
             {/* After Submission */}
             <div className="chatty-forms-settings-section">
                 <h4>{__('After Submission', 'chatty-forms')}</h4>
