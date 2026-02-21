@@ -122,7 +122,7 @@ const useFormStore = create((set, get) => ({
         const newField = {
             id: uuidv4(),
             type,
-            label: `New ${type.charAt(0).toUpperCase() + type.slice(1)}`,
+            label: `${type.charAt(0).toUpperCase() + type.slice(1)}`,
             placeholder: '',
             required: false,
         };

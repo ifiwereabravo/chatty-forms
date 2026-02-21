@@ -84,7 +84,7 @@ class SubmissionsPage {
         // Fetch
         $query_params = array_merge($params, [$per_page, $offset]);
         if ($vis_exists) {
-            $sql = "SELECT s.*, f.title as form_title, v.name as visitor_name, v.email as visitor_email, v.phone as visitor_phone
+            $sql = "SELECT s.*, f.title as form_title, f.fields_json, v.name as visitor_name, v.email as visitor_email, v.phone as visitor_phone
                 FROM $sub_table s
                 LEFT JOIN $forms_table f ON s.form_id = f.id
                 LEFT JOIN $vis_table v ON JSON_UNQUOTE(JSON_EXTRACT(s.meta_json, '$.visitor_id')) = v.visitor_id
@@ -92,7 +92,7 @@ class SubmissionsPage {
                 ORDER BY s.created_at DESC
                 LIMIT %d OFFSET %d";
         } else {
-            $sql = "SELECT s.*, f.title as form_title, NULL as visitor_name, NULL as visitor_email, NULL as visitor_phone
+            $sql = "SELECT s.*, f.title as form_title, f.fields_json, NULL as visitor_name, NULL as visitor_email, NULL as visitor_phone
                 FROM $sub_table s
                 LEFT JOIN $forms_table f ON s.form_id = f.id
                 WHERE $where_sql
@@ -174,13 +174,46 @@ class SubmissionsPage {
                                 $data = json_decode($s->data_json, true) ?: [];
                                 $meta = json_decode($s->meta_json, true) ?: [];
 
-                                // Preview: first 2 key=value pairs
+                                // Build field_id => label map from form definition
+                                $field_labels = [];
+                                if (!empty($s->fields_json)) {
+                                    $fields_def = json_decode($s->fields_json, true);
+                                    if (is_array($fields_def)) {
+                                        foreach ($fields_def as $fd) {
+                                            if (isset($fd['id'], $fd['label'])) {
+                                                $field_labels[$fd['id']] = $fd['label'];
+                                            }
+                                        }
+                                    }
+                                }
+
+                                // Resolve a data key to a human-readable label
+                                $resolve_label = function($key) use ($field_labels) {
+                                    // 1. Exact match
+                                    if (isset($field_labels[$key])) return $field_labels[$key];
+                                    // 2. UUID prefix match: key = "{uuid}_{subfield}"
+                                    $last_us = strrpos($key, '_');
+                                    if ($last_us !== false && $last_us > 0) {
+                                        $prefix = substr($key, 0, $last_us);
+                                        $suffix = substr($key, $last_us + 1);
+                                        if (isset($field_labels[$prefix])) {
+                                            return $field_labels[$prefix] . ' — ' . ucfirst($suffix);
+                                        }
+                                    }
+                                    // 3. Fallback: strip UUID, humanize
+                                    $clean = preg_replace('/^[a-f0-9\-]{20,}_?/i', '', $key);
+                                    $clean = preg_replace('/^field_[a-z0-9\-]+_?/i', '', $clean);
+                                    $clean = str_replace('_', ' ', $clean);
+                                    return $clean ? ucfirst($clean) : $key;
+                                };
+
+                                // Preview: first 2 key=value pairs with resolved labels
                                 $preview_parts = [];
                                 $count = 0;
                                 foreach ($data as $k => $val) {
                                     if ($count >= 2) break;
                                     if (is_array($val)) $val = implode(', ', $val);
-                                    $preview_parts[] = esc_html(ucfirst(str_replace('_', ' ', $k))) . ': ' . esc_html(mb_strimwidth($val, 0, 40, '…'));
+                                    $preview_parts[] = esc_html($resolve_label($k)) . ': ' . esc_html(mb_strimwidth($val, 0, 40, '…'));
                                     $count++;
                                 }
                                 $preview = implode(' · ', $preview_parts);
@@ -216,7 +249,7 @@ class SubmissionsPage {
                                                     <?php foreach ($data as $k => $val):
                                                         if (is_array($val)) $val = implode(', ', $val);
                                                     ?>
-                                                        <dt><?php echo esc_html(ucfirst(str_replace('_', ' ', $k))); ?></dt>
+                                                        <dt><?php echo esc_html($resolve_label($k)); ?></dt>
                                                         <dd><?php echo esc_html($val); ?></dd>
                                                     <?php endforeach; ?>
                                                 </dl>
